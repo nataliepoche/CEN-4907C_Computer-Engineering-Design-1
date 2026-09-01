@@ -1,13 +1,8 @@
-# ============================================================
-# LOW-PASS FILTER FREQUENCY RESPONSE
+# Low=pass filter frequency response
 # DG1032 FUNCTION GENERATOR + MSO2302A OSCILLOSCOPE
-#
 # ONLY CHAN1 IS USED
-# ============================================================
 
-
-# --- IMPORTS --- #
-
+# Imports
 import numpy as np
 import pyvisa
 import math
@@ -15,41 +10,25 @@ import time
 import csv
 import matplotlib.pyplot as plt
 
-
-# ============================================================
-# USER SETTINGS
-# ============================================================ #
-
-GEN_ADDRESS = "TCPIP::169.254.213.175::INSTR"      # DG1032
-SCOPE_ADDRESS = "TCPIP::169.254.43.160::INSTR"     # MSO2302A
-
+#User settings
+GEN_ADDRESS = "TCPIP::169.254.213.175::INSTR"      # DG1032, function generator
+SCOPE_ADDRESS = "TCPIP::169.254.43.160::INSTR"     # MSO2302A, oscilloscope
 
 # Frequency sweep
-START_FREQ = 100
-STOP_FREQ = 10000
-NUM_PTS = 32
-
+START_FREQ = 100 # Starting frequency of the sweep
+STOP_FREQ = 10000 # Enfing frequency of the sweep
+NUM_PTS = 32 # Number of frequency measurements to collect
 
 # Function generator
-VOLTAGE_AMPLITUDE = 2.0       # VPP
-DC_OFFSET = 0.0               # V
+VOLTAGE_AMPLITUDE = 2.0       # VPP, amplitude of sine wave produced by the functiongenerator in VPP
+DC_OFFSET = 0.0               # V, DC offset of the function generator in volts
 
-
-# ============================================================
-# CIRCUIT VALUES
-# CHANGE THESE TO YOUR ACTUAL VALUES
-# ============================================================ #
-
+# Theoretical circuit values
 R = 1000          # Resistance in ohms
 C =  0.1e-6         # Capacitance in farads
 
-
-# ============================================================
-# THEORETICAL CUTOFF FREQUENCY
-# ============================================================ #
-
+#Theoretical cutoff
 theoretical_cutoff = 1 / (2 * math.pi * R * C)
-
 
 # Print theoretical cutoff
 print(
@@ -57,126 +36,74 @@ print(
     f"{theoretical_cutoff:.2f} Hz"
 )
 
+# VISA setup
+rm = pyvisa.ResourceManager('@py') # Creates a PyVISA resource manager using the Python VISA backend
 
-# ============================================================
-# VISA SETUP
-# ============================================================ #
+generator = rm.open_resource(GEN_ADDRESS) # Opens communication with the function generator
+scope = rm.open_resource(SCOPE_ADDRESS) # Opens communcation with the oscilloscope
 
-rm = pyvisa.ResourceManager('@py')
+generator.timeout = 5000 # Sets function generator communication timeout to 5000 ms
+scope.timeout = 5000 # Sets the oscilloscope communcation timeout to 5000 ms
 
-generator = rm.open_resource(GEN_ADDRESS)
-scope = rm.open_resource(SCOPE_ADDRESS)
+# Function generator setup
+generator.write("*RST") # Resets function generator to default settings
 
-generator.timeout = 5000
-scope.timeout = 5000
-
-
-# ============================================================
-# FUNCTION GENERATOR SETUP
-# ============================================================ #
-
-generator.write("*RST")
-
-time.sleep(0.5)
-
+time.sleep(0.5) # Waits for 0.5 seconds for function generator to reset
 
 # Configure:
-# Sine wave
-# 100 Hz initial frequency
-# 2 VPP
-# 0 V DC offset
-
 generator.write(
-    f"APPL:SIN "
-    f"{START_FREQ},"
-    f"{VOLTAGE_AMPLITUDE},"
-    f"{DC_OFFSET}"
-)
+    f"APPL:SIN " # Sine wave
+    f"{START_FREQ}," # 100 Hz initial frequency
+    f"{VOLTAGE_AMPLITUDE}," # 2 VPP, sets the output amplitude
+    f"{DC_OFFSET}") # 0V DC offset
 
-time.sleep(0.5)
+time.sleep(0.5) # Waits for setting to take effect
 
 
 # Turn output ON
 generator.write("OUTP ON")
 
-time.sleep(0.5)
+time.sleep(0.5) # Gives generator time to stabilize
 
+# Oscilloscope set uscope# only CH1
+scope.write("*RST") # Resets oscilloscope
 
-# ============================================================
-# OSCILLOSCOPE SETUP
-# ONLY CHAN1
-# ============================================================ #
+time.sleep(0.5) # Waits for it to reset
 
-scope.write("*RST")
+# Enable CH1
+scope.write(":CHAN1:DISP ON") # Turns CH1 on
 
-time.sleep(0.5)
+scope.write(":CHAN1:COUP DC") # Sets CH1 to DC coupling
 
-
-# ------------------------------------------------------------
-# Enable CHAN1
-# ------------------------------------------------------------ #
-
-scope.write(":CHAN1:DISP ON")
-
-scope.write(":CHAN1:COUP DC")
-
-
-# ------------------------------------------------------------
 # Vertical scale
-#
-# Your measured Vout was approximately 0.12-0.28 VPP.
-# 0.05 V/div gives better vertical resolution.
-# ------------------------------------------------------------ #
+scope.write(":CHAN1:SCAL 0.05") # Gives better vertical resolution
 
-scope.write(":CHAN1:SCAL 0.05")
+scope.write(":CHAN1:OFFS 0") # Sets vertical offset to 0 V
 
-scope.write(":CHAN1:OFFS 0")
-
-
-# ------------------------------------------------------------
 # Trigger
-# ------------------------------------------------------------ #
+scope.write(":TRIG:EDGE:SOUR CHAN1") # Sets CH1 as trigger source
 
-scope.write(":TRIG:EDGE:SOUR CHAN1")
+scope.write(":TRIG:EDGE:SLOP POS") # Trigger slope to positive
 
-scope.write(":TRIG:EDGE:SLOP POS")
+scope.write(":TRIG:EDGE:LEV 0") # Sets trigger level to 0 V
 
-scope.write(":TRIG:EDGE:LEV 0")
+scope.write(":MEAS:CLE") # Clears old measurements
 
+time.sleep(0.5) # Gives time to update
 
-# ------------------------------------------------------------
-# Clear old measurements
-# ------------------------------------------------------------ #
-
-scope.write(":MEAS:CLE")
-
-time.sleep(0.5)
-
-
-# ============================================================
-# CREATE 32 LOGARITHMIC FREQUENCY POINTS
-# ============================================================ #
-
+# Creates 32 data points
 frequencies = np.logspace(
     np.log10(START_FREQ),
     np.log10(STOP_FREQ),
     NUM_PTS
 )
 
-
-# ============================================================
-# ARRAYS FOR MEASUREMENTS
-# ============================================================ #
-
+# Arrays for measurements
 valid_freqs = []
 
 vout_values = []
 
-
-# ============================================================
-# FREQUENCY SWEEP
-# ============================================================ #
-
+# Frequency sweep
 print("\n======================================================")
 
 print("MEASUREMENTS")
@@ -192,42 +119,30 @@ print("------------------------------------------------------")
 
 for f in frequencies:
 
-    # --------------------------------------------------------
-    # Set generator frequency
-    # --------------------------------------------------------
-
+    # Generator Frequency
+    # Sets the current  frequency to function generator
     generator.write(
         f"FREQ {f}"
     )
 
-
     # Give generator a short time to settle
     time.sleep(0.20)
 
-
-    # --------------------------------------------------------
-    # Set oscilloscope time scale
-    # --------------------------------------------------------
-
+    # Set Oscilloscope time scale
     # Approximately two periods across the screen
-
     time_per_div = max(
         0.2 / f,
         5e-6
     )
 
     scope.write(
-        f":TIM:SCAL {time_per_div}"
+        f":TIM:SCAL {time_per_div}" # Sends time scale to o
     )
-
-
-    # --------------------------------------------------------
-    # Start acquisition
-    # --------------------------------------------------------
-
+    
+    # Starts waveform acquisition
     scope.write(":RUN")
 
-    time.sleep(0.25)
+    time.sleep(0.25) # Waits for waveform to update
 
 
     # --------------------------------------------------------
@@ -243,6 +158,7 @@ for f in frequencies:
             ":MEASure:VPP? CHANnel1"
         )
 
+    # Handles timeout from 
     except pyvisa.VisaIOError:
 
         print(
@@ -251,22 +167,18 @@ for f in frequencies:
         )
 
         continue
-
-
-    # --------------------------------------------------------
-    # Second measurement
-    #
-    # This is the value we keep.
-    # --------------------------------------------------------
-
+    
+    # Attempts acutal VPP measurement
     try:
 
+        # Requests CH1 peak-to-peak voltage
         vout_string = scope.query(
             ":MEASure:VPP? CHANnel1"
         ).strip()
 
         vout = float(vout_string)
 
+    # Handles communcation errors
     except (pyvisa.VisaIOError, ValueError):
 
         print(
@@ -275,12 +187,8 @@ for f in frequencies:
         )
 
         continue
-
-
-    # --------------------------------------------------------
-    # Check measurement
-    # --------------------------------------------------------
-
+    
+    # Chack Measurement# Checks if the measured voltage is valid
     if vout <= 0 or vout >= 1e30:
 
         print(
@@ -289,51 +197,36 @@ for f in frequencies:
         )
 
         continue
-
-
-    # --------------------------------------------------------
-    # Store valid measurement
-    # --------------------------------------------------------
-
+    
+    # Store valid measurements
     valid_freqs.append(f)
 
     vout_values.append(vout)
 
-
-# ============================================================
-# CONVERT TO NUMPY ARRAYS
-# ============================================================ #
-
+# Convert to numpy arrays
 valid_freqs = np.array(valid_freqs)
 
 vout_values = np.array(vout_values)
 
-
-# ============================================================
-# CHECK THAT DATA WAS COLLECTED
-# ============================================================ #
-
+# Checks data was collected
 if len(valid_freqs) < 3:
 
     print(
         "\nERROR: Not enough valid measurements."
     )
 
-    generator.write("OUTP OFF")
+    generator.write("OUTP OFF") # Turns generator output off
 
-    generator.close()
+    generator.close() # Closes generator connection
 
-    scope.close()
+    scope.close() # Closes oscilloscope connecttion
 
-    rm.close()
+    rm.close() # Closes VISA resource manager
 
-    raise SystemExit
+    raise SystemExit # Stops program
 
 
-# ============================================================
-# DETERMINE LOW-FREQUENCY PASSBAND REFERENCE
-# ============================================================ #
-
+# Determine low frequency passband reference
 # The first point in your previous data was an outlier.
 #
 # Therefore, don't use the first point to establish the
@@ -341,32 +234,27 @@ if len(valid_freqs) < 3:
 #
 # Use the next several low-frequency points.
 
+# Determines how many low-frequency measurements to Use
+# A maximum of 10 measurements are used
 reference_points = min(
     10,
     len(vout_values) - 1
 )
 
-
+# Calculate median Vout of the low-frequency points
+# These points represent the filter's passband
 reference_vout = np.median(
     vout_values[
         1:reference_points + 1
     ]
 )
 
-
-# ============================================================
-# CALCULATE EXPERIMENTAL GAIN
-# ============================================================ #
-
+#Calculate experiemental gain
 gain_db = 20 * np.log10(
     vout_values / reference_vout
 )
 
-
-# ============================================================
-# PRINT COMPLETE RESULTS
-# ============================================================ #
-
+# Print complete results
 print("\n======================================================")
 
 print("LOW-PASS FILTER RESULTS")
@@ -408,73 +296,58 @@ for f, v, g in zip(
         f"{g:8.2f}"
     )
 
-
-# ============================================================
-# FIND EXPERIMENTAL -3 dB CUTOFF
-# ============================================================ #
-
+# Find experimental -3 dB cuttoff
 cutoff_gain = -3.0
 
-experimental_cutoff = None
+experimental_cutoff = None # Assume no cuttoff found
 
-
+# Loop through neighboring gain emasurements
 for i in range(
     len(gain_db) - 1
 ):
 
-    g1 = gain_db[i]
+    g1 = gain_db[i] # Gets current gain measurement
 
-    g2 = gain_db[i + 1]
+    g2 = gain_db[i + 1] # Gets next gain
 
 
     # Check for crossing of -3 dB
-
     if (
         g1 >= cutoff_gain
         and
         g2 <= cutoff_gain
     ):
 
-        f1 = valid_freqs[i]
+        f1 = valid_freqs[i] # Gets first frequency around crossing
 
-        f2 = valid_freqs[i + 1]
-
-
-        # ----------------------------------------------------
-        # Log-frequency interpolation
-        # ----------------------------------------------------
-
+        f2 = valid_freqs[i + 1] # Gets second frequency around crossing
+        
+        # Log-frequency interpolation, converts to log scale
         log_f1 = np.log10(f1)
 
         log_f2 = np.log10(f2)
-
-
+        
+        # Calcualtes how far between 2 points the -3dB level occurs
         fraction = (
             (cutoff_gain - g1)
             /
             (g2 - g1)
         )
-
-
+        
+        # Interpolates between the two logarithms
         log_fc = (
             log_f1
             +
             fraction *
             (log_f2 - log_f1)
         )
-
-
+        
+        # Converts interpolated logarothsm back into Hz
         experimental_cutoff = (
             10 ** log_fc
         )
-
-
+        
         break
-
-
-# ============================================================
-# PRINT CUTOFF RESULTS
-# ============================================================ #
 
 print("\n======================================================")
 
@@ -497,7 +370,6 @@ if experimental_cutoff is not None:
 
 
     # Calculate percent difference
-
     percent_difference = (
         abs(
             experimental_cutoff
@@ -526,19 +398,17 @@ else:
 print("======================================================")
 
 
-# ============================================================
-# SAVE CSV
-# ============================================================ #
-
+# Save CSV
+# Opens/Creates CSV file
 with open(
     "lowpass_data.csv",
     mode="w",
     newline=""
 ) as file:
 
-    writer = csv.writer(file)
-
-
+    writer = csv.writer(file) # Creates a CSV filter
+    
+    # Write column headings
     writer.writerow(
         [
             "Frequency (Hz)",
@@ -546,14 +416,15 @@ with open(
             "Gain (dB)"
         ]
     )
-
-
+    
+    # Loop through measured data
     for f, v, g in zip(
         valid_freqs,
         vout_values,
         gain_db
     ):
-
+        
+        # Write one measurement row to CSV
         writer.writerow(
             [
                 f,
@@ -563,10 +434,7 @@ with open(
         )
 
 
-# ============================================================
-# CREATE IDEAL THEORETICAL FREQUENCY RESPONSE
-# ============================================================ #
-
+# Create Ideal Theoretical Frequency response
 theoretical_freqs = np.logspace(
     np.log10(START_FREQ),
     np.log10(STOP_FREQ),
@@ -597,10 +465,7 @@ theoretical_magnitude = (
 )
 
 
-# ------------------------------------------------------------
 # Convert ideal magnitude to dB
-# ------------------------------------------------------------ #
-
 theoretical_gain_db = (
     20 *
     np.log10(
@@ -608,20 +473,12 @@ theoretical_gain_db = (
     )
 )
 
-
-# ============================================================
-# BODE PLOT
-# ============================================================ #
-
+# Bode plot
 plt.figure(
     figsize=(9, 6)
 )
 
-
-# ------------------------------------------------------------
 # Experimental response
-# ------------------------------------------------------------ #
-
 plt.semilogx(
     valid_freqs,
     gain_db,
@@ -630,11 +487,7 @@ plt.semilogx(
     label="Experimental"
 )
 
-
-# ------------------------------------------------------------
-# Ideal theoretical response
-# ------------------------------------------------------------ #
-
+# Ideal theoretical rsponse
 plt.semilogx(
     theoretical_freqs,
     theoretical_gain_db,
@@ -642,22 +495,14 @@ plt.semilogx(
     label="Ideal Theoretical"
 )
 
-
-# ------------------------------------------------------------
 # -3 dB reference
-# ------------------------------------------------------------ #
-
 plt.axhline(
     y=-3,
     linestyle=':',
     label="-3 dB"
 )
 
-
-# ------------------------------------------------------------
-# THEORETICAL CUTOFF
-# ------------------------------------------------------------ #
-
+# Theoretical cutoff
 plt.axvline(
     x=theoretical_cutoff,
     linestyle='--',
@@ -667,11 +512,7 @@ plt.axvline(
     )
 )
 
-
-# ------------------------------------------------------------
-# EXPERIMENTAL CUTOFF
-# ------------------------------------------------------------ #
-
+# Experiemental cutoff
 if experimental_cutoff is not None:
 
     plt.axvline(
@@ -693,11 +534,7 @@ if experimental_cutoff is not None:
         markersize=8
     )
 
-
-# ------------------------------------------------------------
-# PLOT LABELS
-# ------------------------------------------------------------ #
-
+# Plot labels
 plt.xlabel(
     "Frequency (Hz)"
 )
@@ -710,42 +547,22 @@ plt.title(
     "Low-Pass Filter Frequency Response"
 )
 
-
-# ------------------------------------------------------------
 # Grid
-# ------------------------------------------------------------ #
-
 plt.grid(
     True,
     which="both"
 )
 
-
-# ------------------------------------------------------------
 # Legend
-# ------------------------------------------------------------ #
-
 plt.legend()
 
-
-# ------------------------------------------------------------
 # Layout
-# ------------------------------------------------------------ #
-
 plt.tight_layout()
 
-
-# ------------------------------------------------------------
 # Display
-# ------------------------------------------------------------ #
-
 plt.show()
 
-
-# ============================================================
-# TURN OFF AND CLOSE INSTRUMENTS
-# ============================================================ #
-
+# Turn off and close instruments
 generator.write("OUTP OFF")
 
 generator.close()
