@@ -53,7 +53,7 @@ What’s the green terminal on the power supply? What can it be used for and how
 Answer: The green terminal on the power supply is the true ground/chassis ground terminal. It can be used when a floating or relative voltage reference is not good enough. It can be physically used by connecting the channel to the circuit's ground node.
 
 \section{Technical}
-Explain, in your own words, how the scale settings for voltage & time affect an oscilloscope’s capturing of a waveform. (A good response should identify, describe, and explain the inner workings of an oscilloscope.)
+Explain, in your own words, how the scale settings for voltage and time affect an oscilloscope’s capturing of a waveform. (A good response should identify, describe, and explain the inner workings of an oscilloscope.)
 
 Answer: The scale settings for voltage has two parts. The signal range scale for voltage controls the amplification applied to the input before it reaches the ADC. This determines the ADC's available range and impacts the vertical resolution. The signal range position for voltage impacts the analog front end where it controls the offset DAC that is summed with the input signal. If the signal is positioned too far off-screen, the input can exceed the ADC's range and become clipped, meaning the captured data is actually incorrect rather than merely being displayed incorrectly. The scale settings for time determine the oscilloscope's sampling rate which can impact the resolution of the waveform and the total amount of time included in the capture. A faster time scale allows the oscilloscope to capture rapid changes with greater resolution, while a slower time scale allows a larger time window to be observed.
 
