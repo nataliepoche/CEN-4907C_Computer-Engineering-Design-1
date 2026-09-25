@@ -2,8 +2,10 @@ all: i386_image.bin akita_image.bin
 
 # x86 Build Process
 i386_image.bin: x86_image.s
-	as -march=i386 x86_image.s -o x86.o
-	ld -Ttext 0x7c00 --oformat binary x86.o -o i386_image.bin
+# 	# as -march=i386 x86_image.s -o x86.o
+	as --32 -march=i386 x86_image.s -o x86.o
+# 	ld -Ttext 0x7c00 --oformat binary x86.o -o i386_image.bin
+	ld -m elf_i386 -Ttext 0x7c00 --oformat binary x86.o -o i386_image.bin
 
 # ARM Build Process
 akita_image.bin: akita_image.s

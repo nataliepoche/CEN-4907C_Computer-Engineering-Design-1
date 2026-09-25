@@ -12,15 +12,25 @@ print_loop:
     jz halt_cpu             
 
 wait_uart:
-    /* Read LSR to check UART status */
-    in $0x3fd, %al          
+    /* Read LSR to check UART status */   
+    # Replace direct immediate access:
+    # inb $0x3fd, %al   <-- Incorrect (truncates to 0xfd)
+
+    # With register-based I/O:
+    mov $0x3fd, %dx
+    inb %dx, %al    
     test $0x20, %al         
     jz wait_uart            
 
 send_uart:
     /* Retrieve the character and output to THR */
     mov -1(%si), %al        
-    out %al, $0x3f8         
+    # Replace direct immediate access:
+    # outb %al, $0x3f8  <-- Incorrect (truncates to 0xf8)
+
+    # With register-based I/O:
+    mov $0x3f8, %dx
+    outb %al, %dx         
     jmp print_loop          
 
 halt_cpu:
