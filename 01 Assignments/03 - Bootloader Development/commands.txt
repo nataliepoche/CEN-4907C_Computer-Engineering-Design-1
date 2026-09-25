@@ -1,0 +1,26 @@
+Start Up:
+sudo apt update && sudo apt upgrade
+sudo apt install build-essential d52 gdb-multiarch
+sudo apt install qemu-system-x86 gcc-arm-none-eabi qemu-system-arm
+sudo apt update && sudo apt install -y qemu-system-x86_64
+chmod +x build-script.shs
+sed -i 's/\r$//' build-script.sh
+./build-script.sh
+
+Test x86:
+as --32 -march=i386 x86_image.s -o x86.o && ld -m elf_i386 -Ttext 0x7c00 --oformat binary x86.o -o i386_image.bin -s -S
+qemu-system-i386 -cpu 486 -nographic -device loader,file=lemon_log.bin,addr=0x500 -hda i386_image.bin
+ctrl+A, x to exit
+In second terminal
+gdb-multiarch
+target remote localhost:1234
+disconnect
+qemu-system-x86_64 -cpu qemu64 -nographic -device loader,file=lemon_log.bin,addr=0x500 -hda i386_image.bin -s -S
+ctrl+A, x to exit
+
+Test ARM:
+arm-none-eabi-as -march=armv4t akita_image.s -o arm.o
+arm-none-eabi-ld -Ttext 0x0 arm.o -o arm.elf
+arm-none-eabi-objcopy -O binary --only-section=.text arm.elf akita_image.bin
+qemu-system-arm -M akita -nographic -device loader,file=akita_image.bin,addr=0 -device loader,file=lemon_log.bin,addr=0xA3F00000 -s -S
+qemu-system-arm -M raspi2 -nographic -device loader,file=akita_image.bin,addr=0 -device loader,file=lemon_log.bin,addr=0xA3F00000 -s -S
