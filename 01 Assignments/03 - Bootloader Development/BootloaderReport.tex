@@ -1,0 +1,93 @@
+% LaTeX is a simple yet highly dynamic and expandable typesetting language. It is the industry standard for academic writing, scientific and technical documentation, and overall just much more useful than other formats like Microsoft Word, once you get up to speed.
+
+% This document will serve as a baseline lab report template, but also a basic introduction to LaTeX that will serve as a foundation for further learning of the language.
+
+% Firstly, aside from text itself, symbols are the fundamental building blocks in LaTeX. These are the text containers and wrappers distinguished with the backslash (\), and they allow us to manipulate our page and text in an intuitive and direct fashion.
+
+\documentclass{article}
+% The document class defines the overall layout. "article" is the standard for short papers and lab reports.
+
+% The area between \documentclass and \begin{document} is called the "Preamble."
+% This is where you load packages to add functionality.
+
+\usepackage{geometry} % Allows us to modify page margins and other characteristics.
+\geometry{letterpaper, left=20mm, top=20mm, right=20mm, bottom=20mm}
+
+\usepackage{graphicx} % Essential for including images/plots
+\usepackage{amsmath}  % The industry standard for formatting math equations
+\usepackage{listings} % For including nicely formatted code blocks
+\usepackage{xcolor}   % For adding color to code or text
+\usepackage{hyperref} % Allows for clickable links and cross-references
+
+% Simple setup for code blocks
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    frame=single
+}
+
+\begin{document} % This must be the fist wrapper, and text in here actually gets rendered.
+% This is the header. Also, \textbf means text boldface. \textit is italic and \underline is underline, obviously.
+\noindent \textbf{Name:} Natalie Poche \\
+\textbf{Date:} \today \\ % \today automatically inserts the current date
+\textbf{UFID:} 1533-9442
+
+\begin{center} % the begin symbol can also create centered blocks
+    \large\textbf{Report - Bootloader Development}
+\end{center}
+
+\section{Introduction}
+The purpose of this lab assignment is to develop raw binary bootloader images for both x86 and ARM processor architectures to understand the basics of boot routines and the services they provide. A primary objective of this project is to highlight the stark differences between ARM and x64 boot routines and their respective levels of hardware standardization. In this activity, bootloaders were written for the Intel i386 platform (using the 486 virtual CPU) and the ARM ``Akita'' platform. The developed bootloaders are designed to read a null-terminated string from a memory-mapped logging device and transmit this message to a serial Universal Asynchronous Receiver-Transmitter (UART) output device before halting execution. 
+
+\section{Design}
+The design phase involved writing assembly source code and utilizing a GCC toolchain—specifically utilizing cross-compilation options for the ARM target—to build raw binary images via Makefiles. To test and verify the bootloaders, the QEMU command-line emulator and GNU Debugger (gdb-multiarch) were used. QEMU's loader driver was explicitly used to simulate the mapping of flash ROM into the memory space.
+
+On the x86 platform, the system architecture utilizes a standardized Basic Input-Output System (BIOS) loaded from ROM to initialize basic input and output devices. Because of this, the first stage bootloader does not need to worry about hardware initialization or loading the boot block (the first 512 bytes) into RAM, as the BIOS automatically handles loading it into address \texttt{0x7c00}. The logging device is mapped directly to the beginning of conventional memory at \texttt{0x500}. Furthermore, the UART devices (COM ports) on x86 are accessed via the data bus using a base port address (e.g., \texttt{0x03F8} for COM1) rather than being memory-mapped.
+
+Conversely, the ARM architecture lacks a standardized firmware boot sequence and does not feature standardized address mapping for devices. Therefore, the first-stage bootloader must be explicitly developed for the exact hardware configuration. On the Akita platform, the bootloader begins execution at the trap table at address \texttt{0x000}, the memory-mapped log device is located at \texttt{0xA3F00000}, and the UART device is memory-mapped at \texttt{0x40100000}. Before data can be transmitted, the ARM bootloader must manually initialize the CPU by modifying the Current Program Status Register (CPSR) to set supervisor mode (\texttt{0x13}), disable THUMB instructions, and mask regular and fast IRQs. 
+
+\section{Results and Discussion}
+Following successful builds, an investigative experiment was conducted utilizing different CPU emulations in QEMU to test the portability of the bootloader images. 
+
+\subsection*{x86 Experiment}
+After successfully running the bootloader on the i386 platform (486 CPU), the same bootloader image was executed using the x86\_64 emulator (qemu64 CPU).
+\begin{enumerate}
+    \item \textbf{Result:} The machine completed the task successfully.
+    \item \textbf{Reasoning:} This success was observed because x86 platforms are highly standardized. The 32-bit (and inherently 64-bit) x86 lines start in 16-bit Real Mode for backwards compatibility. Because the BIOS boot procedures, memory map ranges, and hardware data bus mapping for UART remain strictly standardized across x86 generations, the identical bootloader image executes flawlessly on both the 486 and qemu64 virtual CPUs.
+\end{enumerate}
+
+\subsection*{ARM Experiment}
+After successfully running the bootloader on the ``akita'' platform, the same image was executed using the ``raspi2'' platform.
+\begin{enumerate}
+  \setcounter{enumi}{2}
+    \item \textbf{Result:} The machine failed to complete the task successfully.
+    \item \textbf{Reasoning:} ARM processors do not have standardized address mapping for devices. The specific addresses hardcoded into the bootloader for the Akita platform—such as \texttt{0x40100000} for UART—do not correspond to the same device registers on the raspi2 platform. 
+    \item \textbf{Platform Differences:} This differs significantly from how the x86 bootloader operates. While an x86 bootloader can rely on standard memory spaces (e.g., conventional memory starting at \texttt{0x500}) and standardized data bus ports, at least the first stage of an ARM bootloader must be developed explicitly for a specific hardware layout.
+\end{enumerate}
+
+\section{Conclusion}
+The successful development of x86 and ARM bootloaders highlights the structural differences in how architectures handle system initialization. The x86 boot process is greatly simplified by the standard BIOS, which performs necessary device initialization and reliably maps conventional memory and COM ports. In contrast, the ARM platform demands manual CPU initialization via the CPSR and necessitates querying hardware-specific memory-mapped registers, padding them by 4 bytes for reads and writes. The investigative experiment confirmed that while x86 boot blocks are broadly portable across processor generations due to backwards compatibility, ARM first-stage bootloaders are fundamentally tied to their specific hardware configurations. 
+
+\newpage % Starts a new page for the appendix
+\appendix
+\section{Project Deliverables}
+
+\noindent As required by the project specifications, a screencast demonstrating the Makefiles, build process, and QEMU emulation of both bootloaders is provided below.
+
+\vspace{10pt}
+\noindent \textbf{Screencast Link:} \url{https://youtube.com/unlisted-link-placeholder}
+
+\section{Code Snippets}
+Below are the source assembly files and build automation script imported directly from external code files using the \texttt{\textbackslash lstinputlisting} command.
+
+\vspace{10pt}
+\lstinputlisting[language={[x86masm]Assembler}, caption={x86 Assembly Bootloader Source (x86\_boot.s)}]{bootloader/x86_image.s}
+
+\lstinputlisting[language={[x86masm]Assembler}, caption={ARM Assembly Bootloader Source (arm\_boot.s)}]{bootloader/akita_image.s}
+
+\lstinputlisting[language=make, caption={Build Automation Script (Makefile)}]{bootloader/Makefile}
+
+\end{document}

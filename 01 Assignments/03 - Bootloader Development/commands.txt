@@ -16,15 +16,15 @@ In second terminal
 gdb-multiarch
 target remote localhost:1234
 disconnect
-qemu-system-x86_64 -cpu qemu64 -nographic -device loader,file=lemon_log.bin,addr=0x500 -hda i386_image.bin -s -S
+qemu-system-x86_64 -cpu qemu64 -nographic -device loader,file=lemon_log.bin,addr=0x500 -hda i386_image.bin
 ctrl+A, x to exit
 
 Test ARM:
 arm-none-eabi-as -march=armv4t akita_image.s -o arm.o
 arm-none-eabi-ld -Ttext 0x0 arm.o -o arm.elf
 arm-none-eabi-objcopy -O binary --only-section=.text arm.elf akita_image.bin
-qemu-system-arm -M akita -nographic -device loader,file=akita_image.bin,addr=0 -device loader,file=lemon_log.bin,addr=0xA3F00000 -s -S
-qemu-system-arm -M raspi2 -nographic -device loader,file=akita_image.bin,addr=0 -device loader,file=lemon_log.bin,addr=0xA3F00000 -s -S
+qemu-system-arm -M akita -nographic -device loader,file=akita_image.bin,addr=0 -device loader,file=lemon_log.bin,addr=0xA3F00000
+qemu-system-arm -M raspi2b -nographic -device loader,file=akita_image.bin,addr=0 -device loader,file=lemon_log.bin,addr=0xA3F00000
 
 Loading:
 tar -czvf bootloader.tgz bootloader

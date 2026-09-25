@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.9)  25 SEP 2026 08:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.9)  25 SEP 2026 15:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/03 - Bootloader Development/bootloader_development.tex"
-(c:/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/03 - Bootloader Development/bootloader_development.tex
+**"c:/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/03 - Bootloader Development/BootloaderReport.tex"
+(c:/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/03 - Bootloader Development/BootloaderReport.tex
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
 (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -265,8 +265,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 ) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\l3backend-pdftex.def
 File: l3backend-pdftex.def 2026-08-10 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count319
-) (bootloader_development.aux)
-\openout1 = `bootloader_development.aux'.
+) (BootloaderReport.aux)
+\openout1 = `BootloaderReport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
 LaTeX Font Info:    ... okay on input line 32.
@@ -342,40 +342,59 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count326
 Package hyperref Info: Link coloring OFF on input line 32.
- (bootloader_development.out) (bootloader_development.out)
+ (BootloaderReport.out) (BootloaderReport.out)
 \@outlinefile=\write3
-\openout3 = `bootloader_development.out'.
+\openout3 = `BootloaderReport.out'.
 
  [1
 
-{C:/Users/Owner/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+{C:/Users/Owner/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
+LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 84.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 84.
+
+
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbackslash' on input line 84.
+
+(C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
-) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang2.sty
+File: lstlang2.sty 2025/11/14 1.11b listings language file
+) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang3.sty
+File: lstlang3.sty 2025/11/14 1.11b listings language file
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 87.
+ (bootloader/x86_image.s) (bootloader/akita_image.s [3]) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
+) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang2.sty
+File: lstlang2.sty 2025/11/14 1.11b listings language file
 ) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-)
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 101.
- [2] (bootloader_development.aux)
+) (bootloader/Makefile) [4] (BootloaderReport.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
  ***********
-Package rerunfilecheck Info: File `bootloader_development.out' has not changed.
-(rerunfilecheck)             Checksum: B4CC47E9A8CF176E68489E291F9F9DDC;720.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package rerunfilecheck Info: File `BootloaderReport.out' has not changed.
+(rerunfilecheck)             Checksum: 7142BDB2D44F450BA9BD2E6519BC24D3;687.
  ) 
 Here is how much of TeX's memory you used:
- 11883 strings out of 467441
- 181951 string characters out of 5407592
- 810426 words of memory out of 5000000
- 41065 multiletter control sequences out of 15000+600000
- 630028 words of font info for 49 fonts, out of 8000000 for 9000
+ 12477 strings out of 467441
+ 188624 string characters out of 5407592
+ 1098058 words of memory out of 5000000
+ 41539 multiletter control sequences out of 15000+600000
+ 630624 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,7n,79p,459b,1377s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on bootloader_development.pdf (2 pages, 112902 bytes).
+ 74i,6n,79p,897b,2167s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Owner\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt0900.pk><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on BootloaderReport.pdf (4 pages, 126832 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 15 named destinations out of 1000 (max. 500000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 113 named destinations out of 1000 (max. 500000)
  49 words of extra memory for PDF output out of 10000 (max. 10000000)
 

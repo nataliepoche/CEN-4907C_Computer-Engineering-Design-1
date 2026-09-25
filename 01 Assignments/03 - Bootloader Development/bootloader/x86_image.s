@@ -14,7 +14,7 @@ print_loop:
 wait_uart:
     /* Read LSR to check UART status */   
     # Replace direct immediate access:
-    # inb $0x3fd, %al   <-- Incorrect (truncates to 0xfd)
+    # inb $0x3fd, %al Incorrect (truncates to 0xfd)
 
     # With register-based I/O:
     mov $0x3fd, %dx
@@ -26,7 +26,7 @@ send_uart:
     /* Retrieve the character and output to THR */
     mov -1(%si), %al        
     # Replace direct immediate access:
-    # outb %al, $0x3f8  <-- Incorrect (truncates to 0xf8)
+    # outb %al, $0x3f8 Incorrect (truncates to 0xf8)
 
     # With register-based I/O:
     mov $0x3f8, %dx
