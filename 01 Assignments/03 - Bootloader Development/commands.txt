@@ -7,6 +7,10 @@ chmod +x build-script.shs
 sed -i 's/\r$//' build-script.sh
 ./build-script.sh
 
+make clean
+make
+make -B
+
 Test x86:
 as --32 -march=i386 x86_image.s -o x86.o
 ld -m elf_i386 -Ttext 0x7c00 --oformat binary x86.o -o i386_image.bin

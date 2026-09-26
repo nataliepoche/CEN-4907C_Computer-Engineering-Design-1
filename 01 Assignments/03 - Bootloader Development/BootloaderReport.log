@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.9)  25 SEP 2026 15:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.9)  25 SEP 2026 22:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -262,30 +262,62 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
 \Hy@SectionHShift=\skip54
+) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+ (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen178
+\captionmargin=\dimen179
+\caption@leftmargin=\dimen180
+\caption@rightmargin=\dimen181
+\caption@width=\dimen182
+\caption@indent=\dimen183
+\caption@parindent=\dimen184
+\caption@hangindent=\dimen185
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count319
+\c@continuedfloat=\count320
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count321
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count322
+) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count323
+\float@exts=\toks25
+\float@box=\box57
+\@float@everytoks=\toks26
+\@floatcapt=\box58
 ) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\l3backend-pdftex.def
 File: l3backend-pdftex.def 2026-08-10 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count319
+\l__color_backend_stack_int=\count324
 ) (BootloaderReport.aux)
 \openout1 = `BootloaderReport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -323,39 +355,68 @@ LaTeX Font Info:    ... okay on input line 32.
 
 (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count320
-\scratchdimen=\dimen178
-\scratchbox=\box57
-\nofMPsegments=\count321
-\nofMParguments=\count322
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count323
-\MPscratchDim=\dimen179
-\MPnumerator=\count324
-\makeMPintoPDFobject=\count325
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count325
+\scratchdimen=\dimen186
+\scratchbox=\box59
+\nofMPsegments=\count326
+\nofMParguments=\count327
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count328
+\MPscratchDim=\dimen187
+\MPnumerator=\count329
+\makeMPintoPDFobject=\count330
+\everyMPtoPDFconversion=\toks28
 ) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count326
-Package hyperref Info: Link coloring OFF on input line 32.
+\c@lstlisting=\count331
+Package hyperref Info: Link coloring OFF on input line 38.
  (BootloaderReport.out) (BootloaderReport.out)
 \@outlinefile=\write3
 \openout3 = `BootloaderReport.out'.
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+<images/i386_image_commands.png, id=27, 1154.51324pt x 133.6995pt>
+File: images/i386_image_commands.png Graphic file (type png)
+<use images/i386_image_commands.png>
+Package pdftex.def Info: images/i386_image_commands.png  used on input line 70.
+(pdftex.def)             Requested size: 240.23016pt x 27.81862pt.
+<images/i386_image.png, id=29, 1153.30875pt x 175.857pt>
+File: images/i386_image.png Graphic file (type png)
+<use images/i386_image.png>
+Package pdftex.def Info: images/i386_image.png  used on input line 77.
+(pdftex.def)             Requested size: 240.23016pt x 36.63052pt.
+<images/x86_image_commands.png, id=30, 1154.51324pt x 124.0635pt>
+File: images/x86_image_commands.png Graphic file (type png)
+<use images/x86_image_commands.png>
+Package pdftex.def Info: images/x86_image_commands.png  used on input line 86.
+(pdftex.def)             Requested size: 240.23016pt x 25.81367pt.
+<images/x86_image.png, id=31, 1154.51324pt x 175.857pt>
+File: images/x86_image.png Graphic file (type png)
+<use images/x86_image.png>
+Package pdftex.def Info: images/x86_image.png  used on input line 93.
+(pdftex.def)             Requested size: 240.23016pt x 36.59027pt.
  [1
 
-{C:/Users/Owner/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
-LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 84.
-LaTeX Font Info:    No file OMScmtt.fd. on input line 84.
+{C:/Users/Owner/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+<images/arm_image.png, id=43, 1154.51324pt x 339.06676pt>
+File: images/arm_image.png Graphic file (type png)
+<use images/arm_image.png>
+Package pdftex.def Info: images/arm_image.png  used on input line 112.
+(pdftex.def)             Requested size: 300.29344pt x 88.19148pt.
+ [2 <./images/i386_image_commands.png> <./images/i386_image.png> <./images/x86_image_commands.png> <./images/x86_image.png> <./images/arm_image.png>]
+LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 133.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 133.
 
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 84.
+(Font)              for symbol `textbackslash' on input line 133.
 
 (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
@@ -364,14 +425,14 @@ File: lstlang2.sty 2025/11/14 1.11b listings language file
 ) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang3.sty
 File: lstlang3.sty 2025/11/14 1.11b listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 87.
- (bootloader/x86_image.s) (bootloader/akita_image.s [3]) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 135.
+ (bootloader/x86_image.s [3]) (bootloader/akita_image.s [4]) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang2.sty
 File: lstlang2.sty 2025/11/14 1.11b listings language file
 ) (C:\Users\Owner\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-) (bootloader/Makefile) [4] (BootloaderReport.aux)
+) (bootloader/Makefile) [5] (BootloaderReport.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
@@ -384,17 +445,17 @@ Package rerunfilecheck Info: File `BootloaderReport.out' has not changed.
 (rerunfilecheck)             Checksum: 7142BDB2D44F450BA9BD2E6519BC24D3;687.
  ) 
 Here is how much of TeX's memory you used:
- 12477 strings out of 467441
- 188624 string characters out of 5407592
- 1098058 words of memory out of 5000000
- 41539 multiletter control sequences out of 15000+600000
+ 13970 strings out of 467441
+ 218326 string characters out of 5407592
+ 1178495 words of memory out of 5000000
+ 43012 multiletter control sequences out of 15000+600000
  630624 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,6n,79p,897b,2167s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Owner\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt0900.pk><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on BootloaderReport.pdf (4 pages, 126832 bytes).
+ 74i,9n,79p,897b,2655s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Owner\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt0900.pk><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Owner/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on BootloaderReport.pdf (5 pages, 336723 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
- 113 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 236 PDF objects out of 1000 (max. 8388607)
+ 120 named destinations out of 1000 (max. 500000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 

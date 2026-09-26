@@ -18,11 +18,17 @@
 \usepackage{listings} % For including nicely formatted code blocks
 \usepackage{xcolor}   % For adding color to code or text
 \usepackage{hyperref} % Allows for clickable links and cross-references
+\usepackage{subcaption} % Combines multiple images into a single figure float
+\usepackage{float}      % Forces exact positioning with [H]
 
 % Simple setup for code blocks
 \lstset{
     basicstyle=\ttfamily\small,
     breaklines=true,
+    breakatwhitespace=true,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
     keywordstyle=\color{blue},
     commentstyle=\color{green!50!black},
     stringstyle=\color{red},
@@ -56,6 +62,43 @@ Following successful builds, an investigative experiment was conducted utilizing
 After successfully running the bootloader on the i386 platform (486 CPU), the same bootloader image was executed using the x86\_64 emulator (qemu64 CPU).
 \begin{enumerate}
     \item \textbf{Result:} The machine completed the task successfully.
+    % Single figure container forces all four screenshots to remain together in a 2x2 grid
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{images/i386_image_commands.png}
+            \caption{Setup for i386 emulator}
+            \label{fig:i386_setup}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{images/i386_image.png}
+            \caption{Results for i386 emulator}
+            \label{fig:i386_results}
+        \end{subfigure}
+
+        \vspace{10pt}
+
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{images/x86_image_commands.png}
+            \caption{Setup for x86\_64 emulator}
+            \label{fig:x86_64_setup}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{images/x86_image.png}
+            \caption{Results for x86\_64 emulator}
+            \label{fig:x86_64_results}
+        \end{subfigure}
+
+        \caption{x86 and x86\_64 emulator setup and execution results.}
+        \label{fig:x86_emulation_all}
+    \end{figure}
+
     \item \textbf{Reasoning:} This success was observed because x86 platforms are highly standardized. The 32-bit (and inherently 64-bit) x86 lines start in 16-bit Real Mode for backwards compatibility. Because the BIOS boot procedures, memory map ranges, and hardware data bus mapping for UART remain strictly standardized across x86 generations, the identical bootloader image executes flawlessly on both the 486 and qemu64 virtual CPUs.
 \end{enumerate}
 
@@ -64,6 +107,12 @@ After successfully running the bootloader on the ``akita'' platform, the same im
 \begin{enumerate}
   \setcounter{enumi}{2}
     \item \textbf{Result:} The machine failed to complete the task successfully.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\linewidth]{images/arm_image.png} % images must be in the same directory for proper compilation. overleaf makes this very simple 
+        \caption{ARM with Akita and Raspi2 set up and result emulation}
+        \label{fig:results} % Labels allow you to reference this figure later (e.g., "As seen in Fig. 1")
+    \end{figure}
     \item \textbf{Reasoning:} ARM processors do not have standardized address mapping for devices. The specific addresses hardcoded into the bootloader for the Akita platform—such as \texttt{0x40100000} for UART—do not correspond to the same device registers on the raspi2 platform. 
     \item \textbf{Platform Differences:} This differs significantly from how the x86 bootloader operates. While an x86 bootloader can rely on standard memory spaces (e.g., conventional memory starting at \texttt{0x500}) and standardized data bus ports, at least the first stage of an ARM bootloader must be developed explicitly for a specific hardware layout.
 \end{enumerate}
@@ -78,12 +127,11 @@ The successful development of x86 and ARM bootloaders highlights the structural 
 \noindent As required by the project specifications, a screencast demonstrating the Makefiles, build process, and QEMU emulation of both bootloaders is provided below.
 
 \vspace{10pt}
-\noindent \textbf{Screencast Link:} \url{https://youtube.com/unlisted-link-placeholder}
+\noindent \textbf{Screencast Link:} \url{https://youtu.be/C69_gjl16MY}
 
 \section{Code Snippets}
 Below are the source assembly files and build automation script imported directly from external code files using the \texttt{\textbackslash lstinputlisting} command.
 
-\vspace{10pt}
 \lstinputlisting[language={[x86masm]Assembler}, caption={x86 Assembly Bootloader Source (x86\_boot.s)}]{bootloader/x86_image.s}
 
 \lstinputlisting[language={[x86masm]Assembler}, caption={ARM Assembly Bootloader Source (arm\_boot.s)}]{bootloader/akita_image.s}
