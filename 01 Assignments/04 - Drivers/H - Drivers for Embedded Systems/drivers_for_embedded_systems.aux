@@ -1,0 +1,35 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Design}{1}{section.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Oscilloscope capture of the I2C bus showing synchronous two-wire serial communication between the RP2040 microcontroller and the LIS3DH accelerometer at a 400 kHz bus clock frequency. Channel 2 (blue) displays the clock line ($\text  {SCL}$, GPIO 3) providing regular timing pulses, while Channel 1 (orange) displays the data line ($\text  {SDA}$, GPIO 2). The visible bursts correspond to data transactions, such as addressing the accelerometer (\texttt  {0x18}) and reading/writing internal configuration and data registers (e.g., polling \texttt  {WHO\_AM\_I} or pulling axis measurements via \texttt  {accel.update()}).}}{1}{figure.1}\protected@file@percent }
+\newlabel{fig:i2c_wave}{{1}{1}{Oscilloscope capture of the I2C bus showing synchronous two-wire serial communication between the RP2040 microcontroller and the LIS3DH accelerometer at a 400 kHz bus clock frequency. Channel 2 (blue) displays the clock line ($\text {SCL}$, GPIO 3) providing regular timing pulses, while Channel 1 (orange) displays the data line ($\text {SDA}$, GPIO 2). The visible bursts correspond to data transactions, such as addressing the accelerometer (\texttt {0x18}) and reading/writing internal configuration and data registers (e.g., polling \texttt {WHO\_AM\_I} or pulling axis measurements via \texttt {accel.update()})}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Oscilloscope capture of the NeoMatrix output line implementing a strict single-wire timing protocol used to drive WS2812 RGB LEDs. Generated via the RP2040's Programmable I/O (PIO) state machine on GPIO 7 at 800 kHz, the waveform uses asymmetric pulse-width modulation where each high-frequency pulse encodes binary data based on precise duration timings ($T_1$, $T_2$, $T_3$). The repeated packet trains represent 24-bit GRB color frames shifted out sequentially to update all 64 pixels in the matrix buffer.}}{2}{figure.2}\protected@file@percent }
+\newlabel{fig:neomatrix_wave}{{2}{2}{Oscilloscope capture of the NeoMatrix output line implementing a strict single-wire timing protocol used to drive WS2812 RGB LEDs. Generated via the RP2040's Programmable I/O (PIO) state machine on GPIO 7 at 800 kHz, the waveform uses asymmetric pulse-width modulation where each high-frequency pulse encodes binary data based on precise duration timings ($T_1$, $T_2$, $T_3$). The repeated packet trains represent 24-bit GRB color frames shifted out sequentially to update all 64 pixels in the matrix buffer}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Theoretical Calculations}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results and Discussion}{2}{section.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparison of Physical Orientation vs. Expected NeoMatrix Output}}{2}{table.1}\protected@file@percent }
+\newlabel{tab:results}{{1}{2}{Comparison of Physical Orientation vs. Expected NeoMatrix Output}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Implementation Challenges and Solutions}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Suggestions for Improvement}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{3}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Source Code Listings}{4}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}\texttt  {README.md}}{4}{subsection.A.1}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Project README and Build Instructions}{4}{lstlisting.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}\texttt  {CMakeLists.txt}}{5}{subsection.A.2}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}CMake Configuration File}{5}{lstlisting.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}\texttt  {src/ws2812.pio}}{6}{subsection.A.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}WS2812 PIO Assembly Program}{6}{lstlisting.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}\texttt  {src/level.cpp}}{7}{subsection.A.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}Bubble Level Application Main Source Code}{7}{lstlisting.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}\texttt  {src/lis3dh.h}}{9}{subsection.A.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}LIS3DH Accelerometer Driver Header}{9}{lstlisting.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.6}\texttt  {src/lis3dh.cpp}}{9}{subsection.A.6}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}LIS3DH Accelerometer Driver Implementation}{9}{lstlisting.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.7}\texttt  {src/neomatrix.h}}{11}{subsection.A.7}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}NeoMatrix Display Driver Header}{11}{lstlisting.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.8}\texttt  {src/neomatrix.cpp}}{12}{subsection.A.8}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}NeoMatrix Display Driver Implementation}{12}{lstlisting.8}\protected@file@percent }
+\gdef \@abspage@last{14}
