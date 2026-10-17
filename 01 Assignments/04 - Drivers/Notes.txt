@@ -1,0 +1,27 @@
+WSL
+rm -rf build && mkdir build && cd build
+cmake -DPICO_SDK_FETCH_FROM_GIT=ON ..
+cmake --build .
+
+# 1. Set paths to the new short directory
+$env:PICO_SDK_PATH = "C:\Users\Owner\CLionProjects\CEN-4907C_Computer-Engineering-Design-1\01 Assignments\04 - Drivers\H - Drivers for Embedded Systems\pico-sdk"
+
+# 2. Automatically find the Arm GNU Toolchain
+$toolchain = Get-ChildItem "C:\Program Files*", "C:\Program Files (x86)*" -Recurse -Filter "arm-none-eabi-gcc.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
+
+if ($toolchain) {
+    $env:PICO_TOOLCHAIN_PATH = $toolchain.Directory.Parent.FullName
+    Write-Host "✔ Found Arm Toolchain at: $env:PICO_TOOLCHAIN_PATH" -ForegroundColor Green
+} else {
+    Write-Host "❌ Arm Toolchain not found via search!" -ForegroundColor Red
+    break
+}
+
+# 3. Configure CMake with Ninja using short paths
+cmake -G "Ninja" -DPICO_BOARD=adafruit_feather_rp2040 -DPICO_TOOLCHAIN_PATH="$env:PICO_TOOLCHAIN_PATH" ..
+
+# 4. Build the project
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "✔ CMake configuration successful! Building project..." -ForegroundColor Green
+    cmake --build .
+}

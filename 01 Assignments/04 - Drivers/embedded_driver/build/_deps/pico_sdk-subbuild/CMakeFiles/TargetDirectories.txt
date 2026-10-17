@@ -1,0 +1,3 @@
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/pico_sdk-subbuild/CMakeFiles/pico_sdk-populate.dir
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/pico_sdk-subbuild/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/pico_sdk-subbuild/CMakeFiles/rebuild_cache.dir

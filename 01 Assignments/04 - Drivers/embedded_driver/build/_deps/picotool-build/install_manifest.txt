@@ -1,0 +1,7 @@
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/picotool/picotool
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/picotool/picotoolTargets.cmake
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/picotool/picotoolTargets-release.cmake
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/picotool/picotoolConfig.cmake
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/picotool/picotoolConfigVersion.cmake
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/picotool/enc_bootloader.elf
+/mnt/c/Users/Owner/CLionProjects/CEN-4907C_Computer-Engineering-Design-1/01 Assignments/04 - Drivers/embedded_driver/build/_deps/picotool/enc_bootloader_mbedtls.elf
